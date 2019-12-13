@@ -1,0 +1,163 @@
+###################
+The SLURM scheduler
+###################
+
+The cluster uses the `SLURM <https://slurm.schedmd.com/>`_ workload manager for resource allocation and job management.
+
+SLURM uses *partitions* which are analogous to queues in other scheduling systems. There is a single partition called *pearl* to which all jobs are submitted. Resources are assigned to an *account* and your unique username is then associated with one (or more) of these accounts depending on your organisational association. It is this association that provides you with access to a set of resources on the cluster.
+
+**************************************
+Getting cluster information and health
+**************************************
+
+Two of the most useful SLURM commands that are available to you are *sinfo* and *squeue*.
+
+The *sinfo* command will show you the general health of the cluster, including the current state of the nodes and general information about them such as number of CPUs and how much memory they have.
+
+This example invokes the command using the optional *–N* (node-centric view) and *–l* (long view):
+
+.. code-block:: console
+
+   $ sinfo -N -l
+   Tue Nov 19 11:55:23 2019
+   NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
+   mn1            1    pearl*       mixed   96   2:24:2 154680        0      1   (null) none
+   mn2            1    pearl*        idle   96   2:24:2 154680        0      1   (null) none
+
+The *squeue* command will show information on currently running jobs and jobs that are queued while they are waiting for resources to become available:
+
+.. code-block:: console
+
+   $ squeue –l
+   Tue Nov 19 13:20:50 2019
+   JOBID   PARTITION     NAME     USER    STATE         TIME      TIME_LIMI     NODES NODELIST(REASON)
+   1257        pearl     bash pearl014  RUNNING     13:30:37     2-00:00:00     1     mn1
+   1251        pearl     bash pearl014  RUNNING   1-15:18:05     2-00:00:00     1     mn1
+   1264        pearl     bash pearl014  RUNNING      1:00:13     2-00:00:00     1     mn1
+   1218        pearl run_v3.s pearl024  RUNNING   3-22:29:29     5-23:00:00     1     mn1
+
+.. seealso::
+   Please see the `sinfo <https://slurm.schedmd.com/sinfo.html>`_ and `squeue <https://slurm.schedmd.com/squeue.html>`_ man pages for further information
+
+********************
+Requesting resources
+********************
+
+SLURM has three commands for requesting resources; *sbatch*, *salloc* and *srun*. The first two allocate resources to you while the latter launches tasks across those resources.
+
+The *srun* command
+==================
+
+A very simple example of a job is to request an interactive session on a worker node. The following command will ask the scheduler to provide a command prompt with one CPU and one GPU:
+
+.. code-block:: console
+
+   $ srun -n 1 --gres=gpu:1 --pty /bin/bash
+
+Once on the node, if you issue the command nvidia-smi you should see that you have access to a single V100 GPU.
+
+*The srun command by default passes all environment variables of the parent shell therefore the X window connection gets preserved as well, allowing for running graphical applications such as GUI based programs inside the interactive job.*
+
+You are able to submit more complex requests using command line parameters but a better approach is to combine them into a job script and then submit your request to the scheduler using the sbatch command.
+
+The *sbatch* command
+====================
+
+This command submits a batch script to the SLURM scheduler by passing the name of a file which contains all your job commands. The file should include a list of *#SBATCH* directives (also known as job submission flags) which tell the job scheduler what you want to do. There are many job submission flags but at a minimum you should include the following:
+
+.. code-block:: console
+
+   #SBATCH -p pearl (the queue to run on)
+   #SBATCH -n 1 (number of processors to run on)
+   #SBATCH --gres=gpu:1 (number of GPUs to use)
+   #SBATCH -t 2:30 (expected job run time)
+
+The estimated run time of your job is an important parameter as it will allow the scheduler to make a better decision as to when your job. You don’t have to be exact but a rough estimate is better than nothing. If you leave this parameter out altogether the scheduler will assume a default runtime.
+
+In this next example, we have requested 4 CPUs and 4 GPUs and have estimated the job execution time to be no more than 12 hours:
+
+.. code-block:: console
+
+   #!/bin/bash
+   
+   #SBATCH -p pearl # partition (queue)
+   #SBATCH --job-name=mytestjob
+   #SBATCH -n 4 # number of CPU cores
+   #SBATCH --gres=gpu:4
+   #SBATCH -t 0:12:00 # time (D-HH:MM)
+
+.. note::
+
+   To summarise, *srun* is used to submit a job for execution in real time while *sbatch* is used to submit a job script for later execution
+
+The *salloc* command
+====================
+
+.. warning::
+
+   **ADD SALLOC COMMAND SECTION**
+
+The *salloc* command reserves resources under a job allocation for interactive use and then releases them when you are finished.
+
+Any command that is run within the allocation is run in parallel across all nodes that nodes that have been allocted. In the next example, the *salloc* command requests two nodes and once allocated, we can check that this is the case with the *srun hostname* command:
+
+.. code-block:: console
+
+   $ salloc -N2 -t 0-00:05
+   salloc: Granted job allocation 1498529
+   salloc: Waiting for resource configuration
+   salloc: Nodes cn2g[17-18] are ready for job
+   cpu-bind=MASK - cn2g17, task  0  0 [67022]: mask 0x101 set
+   
+   $ srun hostname
+   cpu-bind=MASK - cn2g17, task  0  0 [67069]: mask 0x101 set
+   cn2g17.scarf.rl.ac.uk
+   cpu-bind=MASK - cn2g18, task  1  0 [43302]: mask 0x101 set
+   cn2g18.scarf.rl.ac.uk
+
+.. seealso::
+
+   For more detailed information please see the SLURM man pages for `sbatch <https://slurm.schedmd.com/sbatch.html>`_, `srun <https://slurm.schedmd.com/srun.html>`_ and `salloc <https://slurm.schedmd.com/salloc.html>`_.
+
+*********************
+Running parallel jobs
+*********************
+
+.. warning::
+
+   **ADD PARALLEL JOBS SECTION**
+
+*********************
+Controlling your jobs
+*********************
+
+Monitoring jobs
+===============
+
+Once you have submitted your job you can monitor its status with this command:
+
+.. code-block:: console
+
+   $ squeue -u <your_username>
+
+The following example tells us that the job has been accepted by the scheduler. The *PD* field shows that the job is in a *pending* state and the *NODELIST* field tells us that this is because the scheduler is waiting for the requested resources to become available.
+
+.. code-block:: console
+
+   pearl004@ui:~/jobs$ squeue -u pearl004
+                JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+                 1647     pearl    nbody pearl004 PD       0:00      1 (Resources)
+
+Pausing jobs
+============
+
+Killing jobs
+============
+
+If you need to kill your job you would do it with the *scancel* command and the ID of the job you want to kill:
+
+.. code-block:: console
+
+   $ scancel <jobid>
+
+
