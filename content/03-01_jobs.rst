@@ -153,8 +153,3 @@ If you need to kill your job you would do it with the ``scancel`` command and th
 .. code-block:: console
 
    $ scancel <jobid>
-
-X Windows sessions
-==================
-
-You are able to run GUI-based applications pn PEARL. To do so, you must have enabled agent forwarding and X forwarding in your ssh client prior to logging on and you must also have an X server installed and active on your computer.
