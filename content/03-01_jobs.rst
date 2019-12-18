@@ -88,14 +88,10 @@ In this next example, we have requested 4 CPUs and 4 GPUs and have estimated the
 
 .. note::
 
-   To summarise, *srun* is used to submit a job for execution in real time while *sbatch* is used to submit a job script for later execution
+   In summary, *srun* is used to submit a job for execution in real time while *sbatch* is used to submit a job script for later execution
 
 The *salloc* command
 ====================
-
-.. warning::
-
-   **ADD SALLOC COMMAND SECTION**
 
 The *salloc* command reserves resources under a job allocation for interactive use and then releases them when you are finished.
 
@@ -119,13 +115,13 @@ Any command that is run within the allocation is run in parallel across all node
 
    For more detailed information please see the SLURM man pages for `sbatch <https://slurm.schedmd.com/sbatch.html>`_, `srun <https://slurm.schedmd.com/srun.html>`_ and `salloc <https://slurm.schedmd.com/salloc.html>`_.
 
-*********************
-Running parallel jobs
-*********************
+.. *********************
+.. Running parallel jobs
+.. *********************
 
-.. warning::
+.. .. warning::
 
-   **ADD PARALLEL JOBS SECTION**
+..   **ADD PARALLEL JOBS SECTION**
 
 *********************
 Controlling your jobs

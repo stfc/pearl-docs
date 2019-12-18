@@ -78,4 +78,4 @@ You can unload a module with:
 
 .. seealso::
 
-   Please see the `Lmod User Guide <https://lmod.readthedocs.io/en/latest/010_user.html>`_ for further details on how to use Lmod.
+   Please see the `Lmod User Guide <https://lmod.readthedocs.io/en/latest/010_user.html>`_ for further information.
