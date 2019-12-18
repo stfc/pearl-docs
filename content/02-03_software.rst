@@ -30,7 +30,7 @@ Software may also be provided from the Ubuntu repository but this generally prov
 Location of binaries
 ********************
 
-The location of the actual binaries differs depending on what machine you are logged into. This has been done to ensure that software is optimised for the DGX-2’s more recent processor generation but can also be accessed from the head node. In mormal use, this is completely transparent to the user and is only mentioned in this documentation for completeness. You may however see either of the following paths:
+The location of the actual binaries differs depending on what machine you are logged into. This has been done to ensure that software is optimised for the DGX-2’s more recent processor generation but can also be accessed from the head node. In normal use, this should be completely transparent to you and is only mentioned in this documentation for completeness. You may however see either of the following paths:
 
 .. code-block:: console
 

@@ -10,11 +10,11 @@ SLURM uses *partitions* which are analogous to queues in other scheduling system
 Getting cluster information and health
 **************************************
 
-Two of the most useful SLURM commands that are available to you are *sinfo* and *squeue*.
+Two of the most useful SLURM commands that are available to you are ``sinfo`` and ``squeue``.
 
-The *sinfo* command will show you the general health of the cluster, including the current state of the nodes and general information about them such as number of CPUs and how much memory they have.
+The ``sinfo`` command will show you the general health of the cluster, including the current state of the nodes and general information about them such as number of CPUs and how much memory they have.
 
-This example invokes the command using the optional *–N* (node-centric view) and *–l* (long view):
+This example invokes the command using the optional ``–N`` (node-centric view) and ``–l`` (long view):
 
 .. code-block:: console
 
@@ -24,7 +24,7 @@ This example invokes the command using the optional *–N* (node-centric view) a
    mn1            1    pearl*       mixed   96   2:24:2 154680        0      1   (null) none
    mn2            1    pearl*        idle   96   2:24:2 154680        0      1   (null) none
 
-The *squeue* command will show information on currently running jobs and jobs that are queued while they are waiting for resources to become available:
+The ``squeue`` command will show information on currently running jobs and jobs that are queued while they are waiting for resources to become available:
 
 .. code-block:: console
 
@@ -43,7 +43,7 @@ The *squeue* command will show information on currently running jobs and jobs th
 Requesting resources
 ********************
 
-SLURM has three commands for requesting resources; *sbatch*, *salloc* and *srun*. The first two allocate resources to you while the latter launches tasks across those resources.
+SLURM has three commands for requesting resources; ``sbatch``, ``salloc`` and ``srun``. The first two allocate resources to you while the latter launches tasks across those resources.
 
 The *srun* command
 ==================
@@ -56,14 +56,12 @@ A very simple example of a job is to request an interactive session on a worker 
 
 Once on the node, if you issue the command nvidia-smi you should see that you have access to a single V100 GPU.
 
-*The srun command by default passes all environment variables of the parent shell therefore the X window connection gets preserved as well, allowing for running graphical applications such as GUI based programs inside the interactive job.*
-
 You are able to submit more complex requests using command line parameters but a better approach is to combine them into a job script and then submit your request to the scheduler using the sbatch command.
 
 The *sbatch* command
 ====================
 
-This command submits a batch script to the SLURM scheduler by passing the name of a file which contains all your job commands. The file should include a list of *#SBATCH* directives (also known as job submission flags) which tell the job scheduler what you want to do. There are many job submission flags but at a minimum you should include the following:
+This command submits a batch script to the SLURM scheduler by passing the name of a file which contains all your job commands. The file should include a list of ``#SBATCH`` directives (also known as job submission flags) which tell the job scheduler what you want to do. There are many job submission flags but at a minimum you should include the following:
 
 .. code-block:: console
 
@@ -88,14 +86,14 @@ In this next example, we have requested 4 CPUs and 4 GPUs and have estimated the
 
 .. note::
 
-   In summary, *srun* is used to submit a job for execution in real time while *sbatch* is used to submit a job script for later execution
+   In summary, ``srun`` is used to submit a job for execution in real time while ``sbatch`` is used to submit a job script for later execution
 
 The *salloc* command
 ====================
 
-The *salloc* command reserves resources under a job allocation for interactive use and then releases them when you are finished.
+The ``salloc`` command reserves resources under a job allocation for interactive use and then releases them when you are finished.
 
-Any command that is run within the allocation is run in parallel across all nodes that nodes that have been allocted. In the next example, the *salloc* command requests two nodes and once allocated, we can check that this is the case with the *srun hostname* command:
+Any command that is run within the allocation is run in parallel across all nodes that nodes that have been allocted. In the next example, the ``salloc`` command requests two nodes and once allocated, we can check that this is the case with the ``srun hostname`` command:
 
 .. code-block:: console
 
@@ -150,10 +148,13 @@ Pausing jobs
 Killing jobs
 ============
 
-If you need to kill your job you would do it with the *scancel* command and the ID of the job you want to kill:
+If you need to kill your job you would do it with the ``scancel`` command and the ID of the job you want to kill:
 
 .. code-block:: console
 
    $ scancel <jobid>
 
+X Windows sessions
+==================
 
+You are able to run GUI-based applications pn PEARL. To do so, you must have enabled agent forwarding and X forwarding in your ssh client prior to logging on and you must also have an X server installed and active on your computer.

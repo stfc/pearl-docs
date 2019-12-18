@@ -24,7 +24,7 @@ You are also able to pull down images from NGC and convert them to Singularity f
 
 2. Create an NGC API key for access to the NGC container registry. This can be found by selecting ‘SETUP’ from the left-side menu. **Retain a copy of the key for use in the following step**.
 
-3. Log on to ui.pearl.scd.stfc.ac.uk using your pearlXXX account ans set up the Singularity-Docker environment
+3. Log on to ``ui.pearl.scd.stfc.ac.uk`` using your pearlXXX account and set up the Singularity-Docker environment
 
 .. code-block:: console
 
@@ -95,6 +95,4 @@ Then do the following to test the functionality:
 
 .. tip::
 
-   For a more detailed explanation of definition files, please see the Singularity documentation:
-
-   `<https://sylabs.io/guides/3.0/user-guide/definition_files.html>`_
+   For a more detailed explanation of definition files please see the `official Singularity documentation <https://sylabs.io/guides/3.0/user-guide/definition_files.html>`_.
