@@ -67,6 +67,7 @@ This command submits a batch script to the SLURM scheduler by passing the name o
 
    #SBATCH -p pearl (the queue to run on)
    #SBATCH -n 1 (number of processors to run on)
+   #SBATCH --job-name="<job_name>"
    #SBATCH --gres=gpu:1 (number of GPUs to use)
    #SBATCH -t 2:30 (expected job run time)
 
@@ -132,7 +133,7 @@ Once you have submitted your job you can monitor its status with this command:
 
 .. code-block:: console
 
-   $ squeue -u <your_username>
+   $ squeue -u <username>
 
 The following example tells us that the job has been accepted by the scheduler. The *PD* field shows that the job is in a *pending* state and the *NODELIST* field tells us that this is because the scheduler is waiting for the requested resources to become available.
 
@@ -142,14 +143,52 @@ The following example tells us that the job has been accepted by the scheduler. 
                 JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
                  1647     pearl    nbody pearl004 PD       0:00      1 (Resources)
 
-Pausing jobs
-============
+Holding, releasing and requeuing jobs
+=====================================
 
-Killing jobs
-============
-
-If you need to kill your job you would do it with the ``scancel`` command and the ID of the job you want to kill:
+If you need hold a job which has already been submitted to the scheduler you can do so:
 
 .. code-block:: console
 
-   $ scancel <jobid>
+   $ scontrol hold <job_id>
+
+To release a job that has been held:
+
+.. code-block:: console
+   
+   $ scontrol release <job_id>
+
+To requeue a job:
+
+.. code-block:: console
+
+   $ scontrol requeue <job_id>
+
+Cancelling jobs
+===============
+
+If you need to cancel a job (queued or already running) you use the ``scancel`` command:
+
+To cancel a job using the job's unique ID number:
+
+.. code-block:: console
+
+   $ scancel <job_id>
+
+To cancel a job by name:
+
+.. code-block:: console
+
+   $ scancel <job_name>
+
+To cancel all your pending jobs:
+
+.. code-block:: console
+   
+   $ scancel -t PENDING -u <username>
+
+To cancel all your jobs, regardless of their state:
+
+.. code-block:: console
+
+   $ scancel -u <username>
