@@ -92,7 +92,7 @@ In this next example, we have requested 4 CPUs and 4 GPUs and have estimated the
 The *salloc* command
 ====================
 
-The ``salloc`` command reserves resources under a job allocation for interactive use and then releases them when you are finished.
+The ``salloc`` command reserves resources in real-time under a job allocation and then releases them when you are finished.
 
 Any command that is run within the allocation is run in parallel across all nodes that nodes that have been allocted. In the next example, the ``salloc`` command requests two nodes and once allocated, we can check that this is the case with the ``srun hostname`` command:
 
@@ -139,26 +139,40 @@ The following example tells us that the job has been accepted by the scheduler. 
 
 .. code-block:: console
 
-   pearl004@ui:~/jobs$ squeue -u pearl004
+   pearl004@ui:~/jobs $ squeue -u pearl004
                 JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-                 1647     pearl    nbody pearl004 PD       0:00      1 (Resources)
+                 2112     pearl   syrinx pearl004 PD       0:00      1 (Resources)
+
+The output for a running job would be: 
+
+.. code-block:: console
+
+   pearl004@ui:~/jobs $ squeue -u pearl004
+                JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+                 2112     pearl   syrinx pearl004  R      20:33      1 mn1
+
+If you need a more detailed summary of a running job you can use the following command:
+
+.. code-block:: console
+
+   $ scontrol show jobid -dd <job_id>
 
 Holding, releasing and requeuing jobs
 =====================================
 
-If you need hold a job which has already been submitted to the scheduler you can do so:
+If you need to hold a pending job from being run you can do so using:
 
 .. code-block:: console
 
    $ scontrol hold <job_id>
 
-To release a job that has been held:
+To release a job that is currently being held:
 
 .. code-block:: console
    
    $ scontrol release <job_id>
 
-To requeue a job:
+To requeue a running, suspended or completed job:
 
 .. code-block:: console
 
