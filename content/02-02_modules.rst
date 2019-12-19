@@ -14,7 +14,7 @@ PEARL uses the `Lmod <https://lmod.readthedocs.io/en/latest/>`_ environment modu
 
       /apps/modulefiles/eb/
 
-   These give you access to optimised, pre-compiled software and also to the system’s default Singularity build, which is loaded be default.
+   These give you access to optimised, pre-compiled software and also to the system’s default Singularity build which is loaded be default.
 
 To view all the software that is available to you:
 
@@ -52,7 +52,7 @@ To unload all currently loaded modules and revert to the system default state:
 
    $ module restore
 
-Lmod also has a tool called *ml* which provides the same functionality as the full module command but in a shorter, more convenient format. For instance, listing the currently loaded modules becomes simply:
+Lmod also has a tool called ``ml`` which provides the same functionality as the full module command but in a shorter, more convenient format. For instance, listing the currently loaded modules becomes simply:
 
 .. code-block:: console
 

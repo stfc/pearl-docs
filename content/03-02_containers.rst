@@ -4,7 +4,7 @@ Using Containers
 
 Container support on PEARL is provided through `Singularity <https://sylabs.io/singularity/>`_. It is an integral part of the cluster, and Singularity commands can be executed natively on any login or compute node without the need to load any additional modules.
 
-Pearl is connected to the `NVIDIA GPU Cloud <https://www.nvidia.com/en-us/gpu-cloud/>`_ which is also known as NGC. This is a catalogue of pre-optimized deep learning framework containers designed to make full use of the DGX2’s GPUs in both single and multi-GPU configurations.
+Pearl is connected to the `NVIDIA GPU Cloud <https://www.nvidia.com/en-us/gpu-cloud/>`_ which is also known as NGC. This is a catalogue of pre-optimized deep learning framework containers designed to make full use of the DGX-2’s GPUs in both single and multi-GPU configurations.
 
 Please see the `NVIDIA Docker Containers for Deep Learning Frameworks User Guide <https://docs.nvidia.com/deeplearning/frameworks/user-guide/index.html>`_ for more information on running deep learning containers and `Running NGC Containers Using Singularity <https://docs.nvidia.com/ngc/ngc-user-guide/singularity.html>`_ guide for more information.
 
@@ -14,7 +14,7 @@ NGC provides images in Docker format so to run these on PEARL they must first be
 
    PEARL maintains a collection of the most commonly used images from NGC which have already been converted to Singularity format. These can be found here:
 
-   */mnt/beegfs/work/pearl/images/singularity*
+   */mnt/beegfs/images/singularity*
 
 If there is an image you would like to be made available then please request this through the PEARL helpdesk.
 
@@ -24,14 +24,14 @@ You are also able to pull down images from NGC and convert them to Singularity f
 
 2. Create an NGC API key for access to the NGC container registry. This can be found by selecting ‘SETUP’ from the left-side menu. **Retain a copy of the key for use in the following step**.
 
-3. Log on to ``ui.pearl.scd.stfc.ac.uk`` using your pearlXXX account and set up the Singularity-Docker environment
+3. Log on to ``ui.pearl.scd.stfc.ac.uk`` using your pearlXXX account and set up the Singularity-Docker environment:
 
 .. code-block:: console
 
    $ export SINGULARITY_DOCKER_USERNAME='$oauthtoken'
    $ export SINGULARITY_DOCKER_PASSWORD=[your_api_key]
 
-4. Request an interactive session with a GPU
+4. Request an interactive session with access to a GPU:
 
 .. code-block:: console
 
@@ -48,6 +48,25 @@ You are also able to pull down images from NGC and convert them to Singularity f
 .. code-block:: console
 
    $ singularity exec --nv cuda_10.0-base-centos7.sif cat /etc/redhat-release && nvidia-smi
+
+   CentOS Linux release 7.7.1908 (Core)
+   Thu Dec 19 14:00:26 2019
+   +-----------------------------------------------------------------------------+
+   | NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
+   |-------------------------------+----------------------+----------------------+
+   | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+   | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+   |===============================+======================+======================|
+   |   0  Tesla V100-SXM3...  On   | 00000000:34:00.0 Off |                    0 |
+   | N/A   31C    P0    51W / 350W |      0MiB / 32480MiB |      0%      Default |
+   +-------------------------------+----------------------+----------------------+
+
+   +-----------------------------------------------------------------------------+
+   | Processes:                                                       GPU Memory |
+   |  GPU       PID   Type   Process name                             Usage      |
+   |=============================================================================|
+   |  No running processes found                                                 |
+   +-----------------------------------------------------------------------------+
 
 ***************************
 Building a custom container

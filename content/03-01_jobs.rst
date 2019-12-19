@@ -181,7 +181,7 @@ To requeue a running, suspended or completed job:
 Cancelling jobs
 ===============
 
-If you need to cancel a job (queued or already running) you use the ``scancel`` command:
+If you need to cancel a job (either queued or already running) you use the ``scancel`` command:
 
 To cancel a job using the job's unique ID number:
 
@@ -201,7 +201,7 @@ To cancel all your pending jobs:
    
    $ scancel -t PENDING -u <username>
 
-To cancel all your jobs, regardless of their state:
+To cancel all of your jobs, regardless of their state:
 
 .. code-block:: console
 

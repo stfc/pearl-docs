@@ -24,13 +24,13 @@ Not all software is suitable for distribution using Easybuild and some packages 
 
    /apps/modulefiles/core/singularity/3.4.0-1
 
-Software may also be provided from the Ubuntu repository but this generally provides older versions of packages and so is avoided unless absolutely necessary.
+Software may also be provided from the Ubuntu repository but this generally contains older versions of packages and is avoided unless absolutely necessary.
 
 ********************
 Location of binaries
 ********************
 
-The location of the actual binaries differs depending on what machine you are logged into. This has been done to ensure that software is optimised for the DGX-2’s more recent processor generation but can also be accessed from the head node. In normal use, this should be completely transparent to you and is only mentioned in this documentation for completeness. You may however see either of the following paths:
+The location of the binaries differs depending on what machine you are logged into. This has been done to ensure that the software is optimised for the DGX-2’s more recent processor generation but can also be accessed from the head node. In normal use, this should be completely transparent to you and is only mentioned in this documentation for completeness. You may however see either of the following paths:
 
 .. code-block:: console
 
@@ -38,4 +38,6 @@ The location of the actual binaries differs depending on what machine you are lo
 
    /mnt/beegfs/apps/eb/arch/skylake/software/
 
-Software will be added over time but a minimal software stack was made available at service launch. This consists of a recent version of the Singularity containers application, git, Python (plus several common modules) and recent versions of the GCC and Intel compilers. Any requests for specific software to be installed should be made to the PEARL service desk.
+Software will be added over time but a minimal software stack was made available at service launch. This consists of a recent version of the Singularity containers application, git, Python (plus several common modules) and recent versions of the GCC and Intel compilers.
+
+If you would like a particular software package or library to be installed please make your request through the PEARL service desk.

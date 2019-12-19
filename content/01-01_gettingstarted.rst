@@ -14,6 +14,6 @@ The primary login node is ``ui.pearl.scd.stfc.ac.uk``. From here you can access 
 
 .. note::
 
-   Please do not run computationally-intensive tasks on the head node as it can cause problems for other users.
+   Please do not run computationally-intensive tasks on the login node as this can affect other users.
 
-You are also able to log on to the dedicated data transfer node which is ``dtn.pearl.scd.stfc.ac.uk``. This machine is solely for enabling the ingress and egress of data to and from the cluster and for this reason you are not able to submit jobs from here.
+You are also able to log on to the dedicated data transfer node ``dtn.pearl.scd.stfc.ac.uk``. This machine is solely for enabling the ingress and egress of data to and from the cluster and for this reason you are not able to submit jobs from here.
