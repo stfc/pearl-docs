@@ -112,6 +112,6 @@ Then do the following to test the functionality:
    $ singularity run-help hello.simg
    Hello from inside the container!
 
-.. tip::
+.. seealso::
 
    For a more detailed explanation of definition files please see the `official Singularity documentation <https://sylabs.io/guides/3.0/user-guide/definition_files.html>`_.
