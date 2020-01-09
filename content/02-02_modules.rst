@@ -14,7 +14,7 @@ PEARL uses the `Lmod <https://lmod.readthedocs.io/en/latest/>`_ environment modu
 
       /apps/modulefiles/eb/
 
-   These give you access to optimised, pre-compiled software and also to the system’s default Singularity build which is loaded be default.
+   These give you access to optimised, pre-compiled software and also to the system’s default Singularity build which is loaded by default.
 
 To view all the software that is available to you:
 
