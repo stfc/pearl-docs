@@ -76,6 +76,9 @@ It is possible to build a custom container from scratch but the ability to do so
 
 Custom containers are built from a definition file, which is essentially a set of blueprints defining the OS, what software to install, environment variables, etc. At a very minimum the definition file must contain a header section which defines the base operating system that will be used in the container.
 
+You will have to unset the ``SINGULARITY_DOCKER_USERNAME`` and ``SINGULARITY_DOCKER_PASSWORD`` environment variables for this example to work - otherwise Singularity will try and connect to the Docker Hub with your NVIDIA NGC account. 
+If you would like to use a private Docker image, set these variables to your Docker Hub username and access token.
+
 The following very simple example pulls docker layers from the Docker Hub, sets Ubuntu as the OS and defines two sections; test and help:
 
 .. code-block:: console
