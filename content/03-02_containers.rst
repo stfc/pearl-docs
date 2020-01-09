@@ -74,14 +74,14 @@ Building a custom container
 
 It is possible to build a custom container from scratch but the ability to do so is enabled on a per-user basis. If you would like to be able to do this then please contact us via the PEARL Service Desk.
 
-Custom containers are built from a definition file which is essentially a set of blueprints defining the OS, what software to install, environment variables, etc. At a very minimum the definition file must contain a header section which defines the base operating system that will be used in the container.
+Custom containers are built from a definition file, which is essentially a set of blueprints defining the OS, what software to install, environment variables, etc. At a very minimum the definition file must contain a header section which defines the base operating system that will be used in the container.
 
 The following very simple example pulls docker layers from the Docker Hub, sets Ubuntu as the OS and defines two sections; test and help:
 
 .. code-block:: console
 
    Bootstrap: docker
-   From: Ubuntu
+   From: ubuntu
 
    %test
        grep -q NAME=\"Ubuntu\" /etc/os-release

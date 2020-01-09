@@ -54,7 +54,7 @@ A very simple example of a job is to request an interactive session on a worker 
 
    $ srun -n 1 --gres=gpu:1 --pty /bin/bash
 
-Once on the node, if you issue the command nvidia-smi you should see that you have access to a single V100 GPU.
+Once on the node, if you issue the command ``nvidia-smi`` you should see that you have access to a single V100 GPU.
 
 You are able to submit more complex requests using command line parameters but a better approach is to combine them into a job script and then submit your request to the scheduler using the sbatch command.
 
@@ -65,11 +65,11 @@ This command submits a batch script to the SLURM scheduler by passing the name o
 
 .. code-block:: console
 
-   #SBATCH -p pearl (the queue to run on)
-   #SBATCH -n 1 (number of processors to run on)
+   #SBATCH -p pearl #(the queue to run on)
+   #SBATCH -n 1 #(number of processors to run on)
    #SBATCH --job-name="<job_name>"
-   #SBATCH --gres=gpu:1 (number of GPUs to use)
-   #SBATCH -t 2:30 (expected job run time)
+   #SBATCH --gres=gpu:1 #(number of GPUs to use)
+   #SBATCH -t 2:30 #(expected job run time)
 
 The estimated run time of your job is an important parameter as it will allow the scheduler to make a better decision as to when your job. You don’t have to be exact but a rough estimate is better than nothing. If you leave this parameter out altogether the scheduler will assume a default runtime.
 
