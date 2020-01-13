@@ -68,6 +68,14 @@ You are also able to pull down images from NGC and convert them to Singularity f
    |  No running processes found                                                 |
    +-----------------------------------------------------------------------------+
 
+You can also test by running ``singularity shell <container-name>`` which will drop you into an interactive shell inside your container.
+
+.. code-block:: console
+
+    $ singularity shell cuda_10.0-base-centos7.sif
+    Singularity cuda_10.0-base-centos7.sif:~> cat /etc/redhat-release
+    CentOS Linux release 7.7.1908 (Core)
+
 ***************************
 Building a custom container
 ***************************
