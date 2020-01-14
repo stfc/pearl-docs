@@ -123,6 +123,16 @@ Then do the following to test the functionality:
    $ singularity run-help hello.simg
    Hello from inside the container!
 
+
+When building a custom container that uses CUDA, you need to make sure that it uses the correct version of the CUDA API Toolkit (10.2) for the NVIDIA driver installed on PEARL (NVRM 418.67).
+For example you could use the following at the start of your definition file:
+
+.. code-block:: console
+
+    Bootstrap: docker
+    From: nvidia/cuda:10.2-cudnn7-devel
+
+
 .. seealso::
 
    For a more detailed explanation of definition files please see the `official Singularity documentation <https://sylabs.io/guides/3.0/user-guide/definition_files.html>`_.
