@@ -6,15 +6,9 @@ PEARL uses the `Lmod <https://lmod.readthedocs.io/en/latest/>`_ environment modu
 
 .. note::
 
-   The following module paths are automatically added to your environment at logon:
+   The following module paths are automatically added to your environment at logon. These give you access to optimised, pre-compiled software including the system’s default Singularity build.
 
-   .. code-block:: console
-
-      /apps/modulefiles/core/
-
-      /apps/modulefiles/eb/
-
-   These give you access to optimised, pre-compiled software and also to the system’s default Singularity build which is loaded by default.
+   ``/apps/modulefiles/eb/all:/apps/modulefiles/core``
 
 To view all the software that is available to you:
 

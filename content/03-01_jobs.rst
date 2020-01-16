@@ -157,6 +157,7 @@ If you need a more detailed summary of a running job you can use the following c
 
    $ scontrol show jobid -dd <job_id>
 
+
 Holding, releasing and requeuing jobs
 =====================================
 
@@ -206,3 +207,12 @@ To cancel all of your jobs, regardless of their state:
 .. code-block:: console
 
    $ scancel -u <username>
+
+When is my job going to run?
+============================
+
+If your job is queued and you want to know roughly when it will start, use the following command:
+
+.. code-block:: console
+
+   $ squeue --start -j <jobid>
