@@ -42,3 +42,10 @@
     :caption: PEARL and your privacy
 
     06-01_policy.rst
+
+.. toctree::
+   :hiddie:
+   :maxdepth: 1
+   :caption: SSH keys
+
+   99-01_ssh_keys.rst

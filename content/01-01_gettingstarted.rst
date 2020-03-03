@@ -2,9 +2,11 @@
 Accessing the cluster
 #####################
 
-Access to the cluster is via ssh. If you are using either Linux or macOS then you will already have a command line client available to you. If you are using Windows then you will need to install a client program, the most commonly used being `PuTTY <https://www.putty.org/>`_.
+To log in to PEARL you must have an SSH key and an SSH client. If you are using either Linux or macOS then you should already have a command line SSH client available to you. If you are using Windows then you will need to install a client program. We recommend `PuTTY <https://www.putty.org/>`_.
 
-PEARL only supports ssh keys as for authentication and you will need to have the key loaded into an ssh agent. The PuTTY agent is called Pageant and instructions for loading your key can be found `here <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`_.
+You will need to have your private key loaded into an SSH agent. Again, Linux and macOS users should have this already installed. For Windows we recommend `Pageant <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`_.
+
+For instructions on how to generate an SSH key and load it into an agent please see the section on :doc:`/99-01_ssh_key`.
 
 **********
 Logging in 
