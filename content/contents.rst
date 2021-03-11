@@ -21,6 +21,7 @@
 
     03-01_jobs.rst
     03-02_containers.rst
+    03-03_mpi.rst
 
 .. toctree::
     :hidden:

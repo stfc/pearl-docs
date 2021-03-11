@@ -1,0 +1,83 @@
+##################
+MPI and Infiniband
+##################
+
+To run multi-node MPI workloads over the low-latency network, some of the components within the container must closely match those of the host environment. In addition to Infiniband drivers, the container's MPI implementation needs to be ABI-compatible with the version running on the host.
+
+On PEARL the supported MPI implementation is OpenMPI. We recommend using OpenMPI 4.1.0 but you are able to use OpenMPI 3.1.6 if you prefer. The OpenMPI version within your container should be the same as that on the host, or newer.
+
+.. note::
+
+    We have a Singularity definition files available for download that includes everything you need to run an MPI workload on the PEARL worker nodes. It is available as part of an archive which also includes some simple test programs and a SLURM submission script.
+
+        Archive :download:`pearl_openmpi.tar.gz <files/pearl_openmpi.tar.gz>`
+
+To build the image from the definition file, first request an interactive session on one of the worker nodes:
+
+.. code-block:: console
+
+   $ srun --pty /bin/bash
+
+Then build the image using the following command:
+
+.. code-block:: console
+
+   $ singularity build --fakeroot ompi4.sif ompi4.def
+
+Once complete, you can launch a shell within the container:
+
+.. code-block:: console
+
+  $ singularity shell ompi4.sif
+
+From here you can check the following important components:
+
+The Infiniband driver version:
+
+.. code-block:: console
+
+   Singularity> ofed_info -s
+   OFED-internal-5.2-1.0.4:
+
+The OpenMPI version:
+
+.. code-block:: console
+
+   Singularity> mpirun --version
+   mpirun (Open MPI) 4.1.0
+
+Then check that OpenMPI has been built with IB support:
+
+.. code-block:: console
+
+   Singularity> ompi_info | grep btl
+                 MCA btl: openib (MCA v2.1.0, API v3.1.0, Component v4.1.0)
+
+To ensure that everything works as expected, you can run the included tests by submitting them as a batch job using the job script provided:
+
+.. code-block:: console
+
+   $ sbatch submit.slurm
+
+When the job has completed, view the output file to check the results. The first result is a bandwidth test between the two nodes running on the host OS. The second set of figures is the same test but run within the container. The third set of results is another bandwidth test running inside the container, but this time using mpi4py.
+
+**********************************
+OpenMPI run-time tuning parameters
+**********************************
+
+To ensure optimum performance over the low-latency network, There are a two run-time parameters that you should include when running an MPI workload.
+
+.. code-block:: console
+
+   --mca btl_openib_allow_ib 1 --mca btl_openib_if_include mlx5_0:1
+
+In context, the full command used to run the mpi4py bandwidth test would be:
+
+.. code-block:: console
+
+   mpirun -q --mca btl_openib_allow_ib 1 --mca btl_openib_if_include mlx5_0:1 singularity exec --nv ompi4.sif python tests/bandwidth.py
+
+.. note::
+
+   The ``-q`` directive sets OpenMPI's reporting to 'quiet' mode to supress non-error messages
+

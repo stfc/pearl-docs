@@ -2,9 +2,11 @@
 Using Containers
 ################
 
+Whilst you are able to run programs directly on the host OS, most of the workloads run on PEARL use containers and much of this documentation assumes you are doing so.
+
 Container support on PEARL is provided through `Singularity <https://sylabs.io/singularity/>`_. It is an integral part of the cluster, and Singularity commands can be executed natively on any login or compute node without the need to load any additional modules.
 
-Pearl is connected to the `NVIDIA GPU Cloud <https://www.nvidia.com/en-us/gpu-cloud/>`_ which is also known as NGC. This is a catalogue of pre-optimized deep learning framework containers designed to make full use of the DGX-2’s GPUs in both single and multi-GPU configurations.
+PEARL is connected to the `NVIDIA GPU Cloud <https://www.nvidia.com/en-us/gpu-cloud/>`_ which is also known as NGC. This is a catalogue of pre-optimized deep learning framework containers designed to make full use of the DGX-2’s GPUs in both single and multi-GPU configurations.
 
 Please see the `NVIDIA Docker Containers for Deep Learning Frameworks User Guide <https://docs.nvidia.com/deeplearning/frameworks/user-guide/index.html>`_ for more information on running deep learning containers and `Running NGC Containers Using Singularity <https://docs.nvidia.com/ngc/ngc-user-guide/singularity.html>`_ guide for more information.
 
@@ -74,12 +76,12 @@ Building a custom container
 
 It is possible to build a custom container from scratch but the ability to do so is enabled on a per-user basis. If you would like to be able to do this then please contact us via the PEARL Service Desk.
 
-Custom containers are built from a definition file, which is essentially a set of blueprints defining the OS, what software to install, environment variables, etc. At a very minimum the definition file must contain a header section which defines the base operating system that will be used in the container.
+Custom containers can be built from a definition file, which is essentially a set of blueprints defining the OS, what software to install, environment variables, etc. At a very minimum the definition file must contain a header section which defines the base operating system that will be used in the container.
 
 You will have to unset the ``SINGULARITY_DOCKER_USERNAME`` and ``SINGULARITY_DOCKER_PASSWORD`` environment variables for this example to work - otherwise Singularity will try and connect to the Docker Hub with your NVIDIA NGC account. 
 If you would like to use a private Docker image, set these variables to your Docker Hub username and access token.
 
-The following very simple example pulls docker layers from the Docker Hub, sets Ubuntu as the OS and defines two sections; test and help:
+The following simple example pulls docker layers from the Docker Hub, sets Ubuntu as the OS and defines two sections; *test* and *help*:
 
 .. code-block:: console
 
