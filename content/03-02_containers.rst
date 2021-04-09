@@ -70,6 +70,14 @@ You are also able to pull down images from NGC and convert them to Singularity f
    |  No running processes found                                                 |
    +-----------------------------------------------------------------------------+
 
+You can also test by running ``singularity shell <container-name>`` which will drop you into an interactive shell inside your container.
+
+.. code-block:: console
+
+    $ singularity shell cuda_10.0-base-centos7.sif
+    Singularity cuda_10.0-base-centos7.sif:~> cat /etc/redhat-release
+    CentOS Linux release 7.7.1908 (Core)
+
 ***************************
 Building a custom container
 ***************************
@@ -116,6 +124,16 @@ Then do the following to test the functionality:
 
    $ singularity run-help hello.simg
    Hello from inside the container!
+
+
+When building a custom container that uses CUDA, you need to make sure that it uses the correct version of the CUDA API Toolkit (10.2) for the NVIDIA driver installed on PEARL (NVRM 418.67).
+For example you could use the following at the start of your definition file:
+
+.. code-block:: console
+
+    Bootstrap: docker
+    From: nvidia/cuda:10.2-cudnn7-devel
+
 
 .. seealso::
 
