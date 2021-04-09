@@ -22,7 +22,7 @@ If there is an image you would like to be made available then please request thi
 
 You are also able to pull down images from NGC and convert them to Singularity format. You will need to set up an NGC account and create an API key first which can be done by following these steps:
 
-1. Create a personal NGC account at https://ngc.nvidia.com/signup
+1. Create a personal NGC account at https://ngc.nvidia.com/signin
 
 2. Create an NGC API key for access to the NGC container registry. This can be found by selecting ‘SETUP’ from the left-side menu. **Retain a copy of the key for use in the following step**.
 
