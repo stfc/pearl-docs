@@ -24,7 +24,7 @@ You are also able to pull down images from NGC and convert them to Singularity f
 
 1. Create a personal NGC account at https://ngc.nvidia.com/signup
 
-2. Create an NGC API key for access to the NGC container registry. This can be found by selecting ‘SETUP’ from the left-side menu. **Retain a copy of the key for use in the following step**.
+2. Create an NGC API key for access to the NGC container registry. This can be found by selecting ‘SETUP’ from the right-side menu. **Retain a copy of the key for use in the following step**.
 
 3. Log on to ``ui.pearl.scd.stfc.ac.uk`` using your pearlXXX account and set up the Singularity-Docker environment:
 
